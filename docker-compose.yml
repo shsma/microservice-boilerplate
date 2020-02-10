@@ -1,0 +1,77 @@
+version: '3'
+services:
+
+  webserver:
+    image: nginx:alpine
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./apps/curator/:/var/www/curator
+      - ./apps/dispenser/:/var/www/dispenser
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./docker/nginx/sites/:/etc/nginx/conf.d/
+      - ./docker/nginx/ssl/:/etc/ssl/
+    networks:
+      - app-network
+
+  curator:
+    build:
+      context: apps/curator
+      dockerfile: Dockerfile
+    image: digitalocean.com/php
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: curator
+      SERVICE_TAGS: dev
+    working_dir: /var/www/curator
+    volumes:
+      - ./apps/curator/:/var/www/curator
+      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - app-network
+
+  dispenser:
+    build:
+      context: apps/dispenser
+      dockerfile: Dockerfile
+    image: digitalocean.com/php
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: dispenser
+      SERVICE_TAGS: dev
+    working_dir: /var/www/dispenser
+    volumes:
+      - ./apps/dispenser/:/var/www/dispenser
+      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - app-network
+
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: dispenser_db
+      MYSQL_ROOT_PASSWORD: root
+      SERVICE_NAME: mysql
+      SERVICE_TAGS: dev
+    volumes:
+      - dbdata:/var/lib/mysql/
+      - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  dbdata:
+    driver: local
