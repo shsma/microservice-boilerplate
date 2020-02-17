@@ -23,3 +23,12 @@ https://www.nginx.com/
 
 - We will be using `php-7.4` alongside with the `fpm` procces manager.
 - We will be using `mysql 8.0` and take advantage of it’s blazing speed.
+
+
+## Questions and Improvements
+
+For any question or emprovement please send an e-mail to Shady Smaoui [shady@veloxsolutions.ca](mailto:shady@veloxsolutions.ca).
+
+## License
+
+ShadySmaoui©2019 licensed under the [MIT license](https://opensource.org/licenses/MIT).
