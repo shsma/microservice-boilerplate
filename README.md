@@ -7,9 +7,9 @@ https://medium.com/@shadysmaoui/micro-services-with-lumen-laravel-nginx-mysql-70
 
 ## Prerequisites:
 
-`Docker`
-`Docker-compose`
-`composer`
+- `Docker`
+- `Docker-compose`
+- `composer`
 
 ## Technologies
 `Lumem -v 6.x` : It is the perfect solution for building Laravel based micro-services and blazing fast APIs. It is one of the fastest micro-frameworks available.
