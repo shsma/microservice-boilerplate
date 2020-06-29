@@ -4,6 +4,9 @@ RUN apt-get update && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libpng-dev \
+        git \
+        zip \
+        unzip \ 
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd
 
@@ -26,6 +29,11 @@ COPY . /var/www/curator
 
 # Copy existing application directory permissions
 COPY --chown=www:www . /var/www/curator
+
+# Install Composer
+RUN cd /var/www/curator
+RUN composer install
+RUN composer update --no-scripts
 
 # Change current user to www
 USER www
