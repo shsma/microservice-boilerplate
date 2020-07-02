@@ -30,13 +30,19 @@ COPY . /var/www/curator
 # Copy existing application directory permissions
 COPY --chown=www:www . /var/www/curator
 
-# Install Composer
+# Change current user to www
+USER www
+
+# Composer install
 RUN cd /var/www/curator
 RUN composer install
 RUN composer update --no-scripts
+RUN composer dump-autoload
 
-# Change current user to www
-USER www
+# Set storage permission to public
+RUN chmod -R 777 storage/
+
+
 
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
