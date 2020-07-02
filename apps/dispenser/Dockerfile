@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y \
         libpng-dev \
         git \
         zip \
-        unzip \ 
+        unzip \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd
 
@@ -30,13 +30,16 @@ COPY . /var/www/dispenser
 # Copy existing application directory permissions
 COPY --chown=www:www . /var/www/dispenser
 
-# Install Composer
+# Change current user to www
+USER www
+
+# Composer install
 RUN cd /var/www/dispenser
 RUN composer install
 RUN composer update --no-scripts
+RUN composer dump-autoload
 
-# Change current user to www
-USER www
+
 
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
