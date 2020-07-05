@@ -11,6 +11,7 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
+$router->get('/', 'HealthCheckController@info');
+
+
+$router->get('/_health', 'HealthCheckController@health');
