@@ -68,6 +68,17 @@ services:
     networks:
       - app-network
 
+  redis:
+    image: "redis:alpine"
+    command: redis-server --requirepass sOmE_sEcUrE_pAsS
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./docker/redis/redis-data:/var/lib/redis
+      - ./docker/redis/redis.conf:/usr/local/etc/redis/redis.conf
+    environment:
+      - REDIS_REPLICATION_MODE=master
+
 networks:
   app-network:
     driver: bridge
