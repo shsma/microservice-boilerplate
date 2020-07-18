@@ -17,7 +17,7 @@ class HealthCheckController extends Controller
 
     public function info()
     {
-        $info['ms-name'] = 'dispenser';
+        $info['ms-name'] = env('APP_NAME', 'Anonymous');
         $info['memory_usage'] = memory_get_usage(true);
         $info['cpu_usage'] = sys_getloadavg()[0];
 
