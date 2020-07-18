@@ -28,19 +28,18 @@ RUN useradd -u 1000 -ms /bin/bash -g www www
 COPY . /var/www/curator
 
 # Copy existing application directory permissions
-COPY --chown=www:www . /var/www/curator
+COPY --chown=www:www . /var/www/dispenser
 
 # Change current user to www
 USER www
 
 # Composer install
-RUN cd /var/www/curator
 RUN composer install
 RUN composer update --no-scripts
 RUN composer dump-autoload
 
-# Set storage permission to public
-RUN chmod -R 777 storage/
+# Set /storage /public permission to public
+RUN chmod -R 777 storage/ public/
 
 
 

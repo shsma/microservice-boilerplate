@@ -34,7 +34,6 @@ COPY --chown=www:www . /var/www/dispenser
 USER www
 
 # Composer install
-RUN cd /var/www/dispenser
 RUN composer install
 RUN composer update --no-scripts
 RUN composer dump-autoload
