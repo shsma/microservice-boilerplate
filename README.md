@@ -2,6 +2,7 @@
 
 In this article, I will provide a step-by-step demonstration of the process of dockerizing your micro-services project with Lumen and Laravel alongside with nginx as a web server and mysql. This is the first part of a three article series.
 This initial part will allow us to set up the foundation of our project, dockerize its main components and to establish the basics in order to make a fluid communication between all components.
+
 Here is the Medium post related to this project:
 https://medium.com/@shadysmaoui/micro-services-with-lumen-laravel-nginx-mysql-70b3554e8068
 
