@@ -28,7 +28,7 @@ RUN useradd -u 1000 -ms /bin/bash -g www www
 COPY . /var/www/curator
 
 # Copy existing application directory permissions
-COPY --chown=www:www . /var/www/dispenser
+COPY --chown=www:www . /var/www/curator
 
 # Change current user to www
 USER www
